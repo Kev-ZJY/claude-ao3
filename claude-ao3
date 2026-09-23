@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+CLAUDE_AO3_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+if [ ! -x "$CLAUDE_AO3_ROOT/.venv/bin/claude-ao3" ]; then
+  printf '%s\n' '请先运行 ./scripts/install.sh 安装 Claude 凹3。' >&2
+  exit 1
+fi
+exec "$CLAUDE_AO3_ROOT/.venv/bin/claude-ao3" "$@"

@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+MINI_NOTES_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+if [ ! -x "$MINI_NOTES_DIR/.venv/bin/mini-notes" ]; then
+  printf '%s\n' '请先运行 ./scripts/install.sh 完成本地安装。' >&2
+  exit 1
+fi
+exec "$MINI_NOTES_DIR/.venv/bin/mini-notes" "$@"

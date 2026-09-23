@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "claude-ao3"
+version = "0.6.0"
+description = "Claude 凹3: an independent Claude Code-style AO3 terminal reader"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "textual>=6,<9",
+  "httpx[socks]>=0.28,<0.29",
+  "beautifulsoup4>=4.13,<5",
+  "platformdirs>=4,<5",
+]
+
+[project.scripts]
+claude-ao3 = "mini_notes.cli:main"
+mini-notes = "mini_notes.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "pytest-asyncio>=1,<2", "ruff>=0.13,<1", "pyte>=0.8,<0.9", "hatchling>=1.27,<2", "editables>=0.5,<1"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mini_notes"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
