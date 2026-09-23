@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f5f0">
-  <meta name="description" content="Claude 凹3，一个 Claude Code 风格的 AO3 终端阅读器。搜索想读的故事，按 Ctrl+G 收起阅读，回来接着读。观看真实终端操作录屏，下载原生客户端。">
+  <meta name="description" content="Claude 凹3，一个 Claude Code 风格的 AO3 终端阅读器。在终端里读下一章，按 Ctrl+G 收起阅读，回来接着读。">
   <title>Claude 凹3 — 在终端里，读下一章。</title>
-  <link rel="icon" href="media/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="media/mascot.png" type="image/png">
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
@@ -14,8 +14,10 @@
   <a class="skip-link" href="#main">跳到正文</a>
   <header class="header">
     <nav class="nav shell" aria-label="主导航">
-      <a class="brand" href="#" aria-label="Claude 凹3 首页"><span class="brand-mark" aria-hidden="true">凹</span><span>Claude <span class="brand-cn">凹3</span></span></a>
-      <div class="nav-links"><a href="#demo">看看怎么用</a><a href="#install">开始阅读</a></div>
+      <a class="brand" href="#main" aria-label="Claude 凹3 首页">
+        <span class="mascot-mark"><img src="media/mascot.png" alt="" width="1254" height="1254"></span>
+        <span>Claude <span class="brand-cn">凹3</span></span>
+      </a>
       <a class="button button-small" href="#install">下载 Mac 应用 <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
@@ -23,42 +25,27 @@
   <main id="main">
     <section class="hero shell" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span>给故事，一个终端窗口</p>
         <h1 id="hero-title">在终端里，<br>读<span class="next-word">下一章<span class="cursor" aria-hidden="true">_</span></span>。</h1>
-        <p class="hero-description">看起来在写代码，<br>其实正读到精彩的地方。</p>
-        <p class="hero-detail">Claude 凹3，把 AO3 阅读带进终端。<br>需要时收起，回来从原位置接着读。</p>
-        <div class="hero-actions">
-          <button class="button" type="button" data-watch><span class="play-icon" aria-hidden="true">▶</span> 看实际操作</button>
-          <a class="text-link" href="#install">安装与使用 <span aria-hidden="true">↗</span></a>
-        </div>
-        <div class="hero-footnote"><span>Mac 应用 / 终端命令</span><span class="dot-separator" aria-hidden="true">·</span><span>免装 Python · 无需 API Key</span></div>
+        <p class="hero-description">干等Agent，<wbr>不如偷偷支持家产</p>
       </div>
-
       <div class="demo" id="demo">
-        <div class="demo-topline"><span class="mono">claude-ao3</span><span class="demo-label"><span class="record-dot" aria-hidden="true"></span>真实终端录制</span></div>
+        <h2 class="demo-title">Claude 凹3操作演示</h2>
         <figure class="terminal-figure">
           <div class="video-wrap">
-            <video id="terminal-video" controls playsinline preload="metadata" poster="media/poster.png" aria-label="Claude 凹3 实际终端操作：搜索、阅读、切章、收起与续读" aria-describedby="recording-note">
+            <video id="terminal-video" controls playsinline preload="metadata" poster="media/poster.png" aria-label="Claude 凹3 操作演示：搜索、阅读、切章、收起与续读" aria-describedby="recording-note">
               <source src="media/terminal-demo.mp4" type="video/mp4">
               <track kind="captions" src="media/captions.vtt" srclang="zh" label="中文操作说明" default>
               你的浏览器暂不支持播放。<a href="media/terminal-demo.mp4">下载操作录屏</a>。
             </video>
           </div>
-          <figcaption id="recording-note"><span>原生终端实录 · 自拟示例正文</span><span id="video-duration" class="mono">操作全过程</span></figcaption>
+          <figcaption id="recording-note">自拟示例正文</figcaption>
         </figure>
-        <div class="scene-label">从你感兴趣的操作开始看 <span aria-hidden="true">↙</span></div>
-        <div class="scenes" role="group" aria-label="跳转到录屏片段">
-          <button type="button" data-scene="search"><span class="scene-command">/search</span><span>搜索作品</span></button>
-          <button type="button" data-scene="chapters"><span class="scene-command">n / p</span><span>前后切章</span></button>
-          <button type="button" data-scene="cover"><span class="scene-command">Ctrl G</span><span>收起阅读</span></button>
-          <button type="button" data-scene="resume"><span class="scene-command">/quit</span><span>退出续读</span></button>
-        </div>
         <p class="video-message" id="video-message" role="status" aria-live="polite"></p>
       </div>
     </section>
 
     <section class="reading shell" aria-labelledby="reading-title">
-      <div class="section-intro"><p class="eyebrow">少一点操作，多读一会儿</p><h2 id="reading-title">故事继续，节奏由你。</h2></div>
+      <h2 id="reading-title">安心摸鱼，节奏由你</h2>
       <div class="features">
         <article><span class="feature-key mono">/search <span aria-hidden="true">↵</span></span><h3>从想读的开始。</h3><p>输入关键词，筛选作品。选中标题，直接进入正文。</p></article>
         <article><span class="feature-key mono">Ctrl + G</span><h3>一键收起，再回到原处。</h3><p>切到本地工作便笺，再按一次，回到刚才的章节和位置。</p></article>
@@ -68,41 +55,34 @@
 
     <section class="install" id="install" aria-labelledby="install-title">
       <div class="install-inner shell">
-        <div class="install-copy"><p class="eyebrow">你的终端，也可以装下故事</p><h2 id="install-title">打开应用，<br>就能接着读。</h2><p>一个独立的 Mac 应用，一扇熟悉的终端窗口。<br>喜欢命令行？也可以用一条命令安装。<br>两种方式都已包含运行环境，无需安装 Python。</p><p class="requirements">Apple Silicon · macOS 13+ · v0.6.0 预览版</p><a class="wheel-link" href="https://github.com/Kev-ZJY/claude-ao3">查看项目源码 <span aria-hidden="true">↗</span></a></div>
-        <div class="install-commands">
-          <div class="install-tabs" role="tablist" aria-label="选择安装方式">
-            <button id="mac-tab" type="button" role="tab" aria-selected="true" aria-controls="mac-panel" tabindex="0">Mac 应用</button>
-            <button id="cli-tab" type="button" role="tab" aria-selected="false" aria-controls="cli-panel" tabindex="-1">终端一键安装</button>
+        <div class="install-copy">
+          <p class="eyebrow">你的终端，也可以装下故事</p>
+          <h2 id="install-title">打开应用，<br>就能接着读。</h2>
+          <p class="install-description">一个独立的 Mac 应用，一扇熟悉的终端窗口。<br>喜欢命令行？也可以用一条命令安装。</p>
+          <p class="requirements">Apple Silicon · macOS 13+</p>
+          <a class="source-link" href="https://github.com/Kev-ZJY/claude-ao3">查看项目源码 <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="install-options">
+          <div class="mac-download">
+            <div class="app-download-row">
+              <img class="app-icon" src="media/app-icon.png" alt="Mac 应用图标" width="76" height="76">
+              <a class="button" href="https://github.com/Kev-ZJY/claude-ao3/releases/download/v0.6.0/Claude-AO3-0.6.0-macos-arm64.dmg">下载 Mac 应用 <span aria-hidden="true">↓</span></a>
+            </div>
+            <p class="preview-note">应用尚未完成 Apple 公证。首次打开可能需要在「系统设置 → 隐私与安全性」中允许。<a href="https://support.apple.com/zh-cn/102445">查看 Apple 操作说明 ↗</a></p>
           </div>
-          <div id="mac-panel" role="tabpanel" aria-labelledby="mac-tab" tabindex="0">
-            <div class="app-identity"><img src="media/app-icon.png" alt="Claude 凹3 终端风格应用图标" width="88" height="88"><div><h3>Claude 凹3</h3><p>让下一章，留在你的 Dock 里。</p></div></div>
-            <ol class="install-steps"><li>下载并打开 DMG 安装文件。</li><li>把 Claude 凹3 拖入「应用程序」。</li><li>打开应用，开始阅读。</li></ol>
-            <a class="button" href="https://github.com/Kev-ZJY/claude-ao3/releases/download/v0.6.0/Claude-AO3-0.6.0-macos-arm64.dmg">下载 Mac 应用 <span aria-hidden="true">↓</span></a>
-            <p class="preview-note">预览版尚未完成 Apple 公证。首次打开可能需要在「系统设置 → 隐私与安全性」中允许。<a href="https://support.apple.com/zh-cn/102445">查看 Apple 操作说明 ↗</a></p>
-          </div>
-          <div id="cli-panel" role="tabpanel" aria-labelledby="cli-tab" tabindex="0" hidden>
-            <div class="code-heading"><span class="mono">TERMINAL</span><button type="button" id="copy-install" aria-label="复制一键安装命令">复制命令 <span aria-hidden="true">⧉</span></button></div>
-            <pre><code id="install-code">curl -fsSL https://github.com/Kev-ZJY/claude-ao3/releases/download/v0.6.0/install.sh | sh -s -- --launch</code></pre>
-            <div class="install-note"><span class="tiny-arrow" aria-hidden="true">↳</span><span>粘贴到 Mac 终端执行，自动下载、校验并安装，完成后启动阅读器。之后新开终端输入 <code>claude-ao3</code> 就能继续。</span></div>
-            <p class="preview-note">命令行安装包含独立运行环境，不需要保留下载包。当前预编译版本支持 Apple Silicon Mac。</p>
+          <div class="cli-install">
+            <h3 class="install-method">终端一键安装</h3>
+            <div class="code-box">
+              <div class="code-heading"><span class="mono">TERMINAL</span><button type="button" id="copy-install" aria-label="复制一键安装命令">复制命令 <span aria-hidden="true">⧉</span></button></div>
+              <pre><code id="install-code">curl -fsSL https://github.com/Kev-ZJY/claude-ao3/releases/download/v0.6.0/install.sh | sh -s -- --launch</code></pre>
+            </div>
+            <p class="install-note">粘贴到 Mac 终端执行，安装后启动阅读器。以后输入 <code>claude-ao3</code> 继续。</p>
             <p id="copy-message" role="status" aria-live="polite"></p>
           </div>
         </div>
       </div>
-    </section>
-
-    <section class="questions shell" aria-labelledby="questions-title">
-      <h2 id="questions-title">开始前，<br>你可能想知道。</h2>
-      <div class="question-list">
-        <details><summary>需要安装 Claude Code 吗？<span aria-hidden="true">+</span></summary><p>不需要。Claude 凹3 是独立的终端阅读器，借鉴编码终端的界面风格。阅读不调用模型，不需要 Claude 账号或 API Key，也不会修改你的 claude 命令。</p></details>
-        <details><summary>网页里可以直接阅读吗？<span aria-hidden="true">+</span></summary><p>这里展示的是实际运行的终端录屏，正文使用自拟示例。安装后，可以在 Mac 应用或自己的终端中搜索和阅读；网页不连接你的本地终端。</p></details>
-        <details><summary>Intel Mac 和 Linux 可以用吗？<span aria-hidden="true">+</span></summary><p>本轮 Mac 应用和一键安装包面向 Apple Silicon。Intel Mac 和 Linux 可从 GitHub 源码安装，需要 Python 3.11 及以上；目前没有对应的预编译下载包。</p></details>
-        <details><summary>书源和阅读进度放在哪里？<span aria-hidden="true">+</span></summary><p>默认从第三方书源 aoya.moe 读取公开作品，实际连接受书源和网络状态影响。阅读进度保存在本机，下次启动会恢复；不需要账号同步。</p></details>
-        <details><summary>Ctrl+G 会做什么？<span aria-hidden="true">+</span></summary><p>它将本程序内的阅读界面切换为工作便笺，再按一次恢复阅读。它不会切换到其他办公软件，也不会自动判断你是否需要收起。</p></details>
-      </div>
+      <p class="independence shell">独立项目，与 Anthropic 和 AO3 无隶属关系。</p>
     </section>
   </main>
-
-  <footer class="footer shell"><a class="brand" href="#"><span class="brand-mark" aria-hidden="true">凹</span><span>Claude <span class="brand-cn">凹3</span></span></a><p>独立项目，与 Anthropic 和 AO3 无隶属关系。</p><span class="mono footer-command">读完这一章，再说。<span aria-hidden="true"> ↵</span></span></footer>
 </body>
 </html>

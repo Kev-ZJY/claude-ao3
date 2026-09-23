@@ -27,6 +27,7 @@ REQUIRED_FILES = (
     'native/macos/Sources/ClaudeAO3/main.swift', 'native/branding/DrawIcon.swift',
     'web/index.html', 'web/app.js', 'web/style.css', 'web/media/favicon.svg',
     'web/media/app-icon.png', 'web/media/poster.png', 'web/media/terminal-demo.mp4',
+    'web/media/mascot.png',
     'web/media/captions.vtt',
     'tests/test_app.py', 'tests/test_cli.py', 'tests/test_engine.py',
     'tests/test_binary_installer.py', 'tests/fixtures/ao3_chapter.html',
